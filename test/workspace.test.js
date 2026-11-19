@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { mkdir, mkdtemp, rm, symlink, writeFile } from 'node:fs/promises'
+import { mkdir, mkdtemp, realpath, rm, symlink, writeFile } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
 import { after, test } from 'node:test'
@@ -31,8 +31,8 @@ test('canonicalizes a workspace and chooses its most specific allowed root', asy
 
   const result = await validateWorkspace(fixture.workspace, [fixture.allowedRoot, nestedRoot])
 
-  assert.equal(result.workspacePath, fixture.workspace)
-  assert.equal(result.allowedRoot, fixture.allowedRoot)
+  assert.equal(result.workspacePath, await realpath(fixture.workspace))
+  assert.equal(result.allowedRoot, await realpath(fixture.allowedRoot))
 })
 
 test('rejects a sibling path outside an allowed root', async () => {

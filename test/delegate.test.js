@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises'
+import { mkdir, mkdtemp, realpath, rm, writeFile } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
 import { after, test } from 'node:test'
@@ -89,7 +89,7 @@ test('sends only the bounded task, acceptance criteria, checks, and applicable p
   assert.match(delegated.prompt, /rejects ACP permission requests/)
   assert.match(delegated.prompt, /acceptance criteria/i)
   assert.doesNotMatch(delegated.prompt, /Codex conversation transcript/)
-  assert.equal(delegated.cwd, fixture.workspace)
+  assert.equal(delegated.cwd, await realpath(fixture.workspace))
 })
 
 test('extracts a structured report after leading commentary', async () => {
