@@ -1,0 +1,10 @@
+{
+  "dshCommandPath": "C:\\Path\\To\\DeepSeek Harness\\resources\\runtime\\cli\\bin\\dsh.cmd",
+  "allowedWorkspaceRoots": [
+    "C:\\Projects",
+    "D:\\Projects"
+  ],
+  "maxConcurrentTasks": 3,
+  "defaultTimeoutSeconds": 900,
+  "maxTimeoutSeconds": 3600
+}
